@@ -75,13 +75,13 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Attack()
     {
-        isChase = false;        // 추격 정지 후 공격
-        isAttack = true;
-        anim.SetBool("isAttack", true);
 
         switch(enemyType)
         {
             case Type.A:
+                isChase = false;        // 추격 정지 후 공격
+                isAttack = true;
+                anim.SetBool("isAttack", true);
 
                 yield return new WaitForSeconds(0.2f);
                 meleeArea.enabled = true;
@@ -90,6 +90,11 @@ public class Enemy : MonoBehaviour
                 meleeArea.enabled = false;
 
                 yield return new WaitForSeconds(1.0f);
+
+                isChase = true;
+                isAttack = false;
+                anim.SetBool("isAttack", false);
+
                 break;
 
             case Type.B:
@@ -107,9 +112,6 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        isChase = true;
-        isAttack = false;
-        anim.SetBool("isAttack", false);
 
     }
 
